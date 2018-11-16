@@ -1,0 +1,30 @@
+.red{
+    padding: 20%;
+    background-color: red;
+    color: white;
+
+}
+.blue{
+    padding: 20%;
+    background-color: blue;
+    color: white;
+}
+
+.selection{
+    height: 50px;
+    margin: 5px;
+}
+
+#arena{
+    /* display: inline; */
+    float: left;
+
+}
+#playingField{
+    height: 500px;
+    width: 500px;
+}
+
+img{
+    height: 50px;
+}

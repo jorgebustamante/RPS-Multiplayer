@@ -1,0 +1,75 @@
+<!doctype <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>RPS MULTIPLAYER</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/style.css" />
+    <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="assets/app.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <!-- blank -->
+                <!-- <h1>Ouch! You've clicked me
+                        <span id="click-value"></span> times!</h1> -->
+                    
+                      <!-- -->
+                      <!-- <button id="click-button">Click Me!!!!</button>
+        
+                      <br> -->
+            </div>
+            <div class="col-md-4" id="teamPick">
+                    <button id="redTeam"> Click to join red team</button>
+                    <br>
+                    <button id="blueTeam">Click to join blue team</button>
+
+            </div>
+            <div class="col-md-4">
+                <h1 id="wins">wins: </h1>
+                <h1 id="losses"> losses: 
+                </h1>
+                <h1 id="ties"> ties:</h1>
+                <!-- blank -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                    <div id="game">
+                            <p>Press r, p, or s to start playing</p>
+                        </div>
+                    <div id="arenaRed" class="arena">
+                            <img src="assets/images/Rock.png" id="rock" class="selectionRed" data-value="r" alt="rock">
+                            <img src="assets/images/paper.png" id="paper" class="selectionRed" data-value="p" alt="paper">
+                            <img src="assets/images/scissors.png" id="scissors" class="selectionRed" data-value="s" alt="scissors">
+                        </div>
+                        <div id="arenaBlue" class="arena">
+                            <img src="assets/images/Rock.png" id="rock" class="selectionBlue" data-value="r" alt="rock">
+                            <img src="assets/images/paper.png" id="paper" class="selectionBlue" data-value="p" alt="paper">
+                            <img src="assets/images/scissors.png" id="scissors" class="selectionBlue" data-value="s" alt="scissors">
+                        </div>
+                <!-- left -->
+            </div>
+            <div class="col-md-4" id="playingField">
+                    <!-- middle -->
+                   
+                </div>
+                <div class="col-md-4">
+                        <!-- right -->
+                    </div>
+            
+        </div>
+    </div>
+
+
+              <!-- <div id="playingField"></div> -->
+    
+</body>
+</html>
