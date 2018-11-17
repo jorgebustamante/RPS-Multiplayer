@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-    console.log( "ready!" );
 
     // <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
   // Initialize Firebase
@@ -14,11 +13,8 @@ $( document ).ready(function() {
   firebase.initializeApp(config);
   // VARIABLES
   // --------------------------------------------------------------------------------
-
   var database = firebase.database();
   var clickCounter = 0;
-  var test = "test"
-
   // FUNCTIONS + EVENTS
   // --------------------------------------------------------------------------------
   //event listener for click from user
@@ -30,12 +26,7 @@ $( document ).ready(function() {
     });
     
   });
-
-  
-
-
-
-  // MAIN PROCESS + INITIAL CODE
+// MAIN PROCESS + INITIAL CODE
   // --------------------------------------------------------------------------------
 //              lisents for value event
   database.ref().on("value", function(snapshot) {
@@ -47,10 +38,9 @@ $( document ).ready(function() {
     console.log("The read failed: " + errorObject.code);
   });
 
-  let red = "";
-  let blue = "";
   let redWins = 0;
   let blueWins = 0;
+  let ties = 0;
   let redTeam = "";
   let blueTeam = "";
 
@@ -60,19 +50,17 @@ $( document ).ready(function() {
   $(".red").text("ROCK, PAPER, SCISSORS");
   $("#arenaRed").show();
   $("#teamPick").hide();
-
  });
-
+//
  $("#blueTeam").on("click", function(){
   blueTeam = $("#playingField").append("<div>");
   blueTeam.addClass("blue");
   $(".blue").text("ROCK, PAPER, SCISSORS");
   $("#arenaBlue").show();
   $("#teamPick").hide();
-
-
  });
 
+ //hides game buttons on load
  function hider(){
    $("#arenaRed").hide();
    $("#arenaBlue").hide();
@@ -82,27 +70,24 @@ $( document ).ready(function() {
 
 
  /////////rock paper scissors logic
- var options = ["r", "p", "s"];
-        var wins = 0;
-        var losses = 0;
-        var ties = 0;
-
+        // var options = ["r", "p", "s"];
+        // var wins = 0;
+        // var losses = 0;
         let redGuess = "";
         let blueGuess = "";
+        //// this sends red user input off to firebase
         $(".selectionRed").on("click", function() {
             redGuess = $(this).attr("data-value");
-            console.log("clickworking");
-            //updates number of clicks to database
+            console.log("red clickworking");
             database.ref().update({
               RedInput: redGuess
             });
             
           });
-          ///////////////////////////////////
+          ///This sends user input off to firebase for blueteam
           $(".selectionBlue").on("click", function() {
             blueGuess = $(this).attr("data-value");
-            console.log("clickworking");
-            //updates number of clicks to database
+            console.log("blue clickworking");
             database.ref().update({
               BlueInput: blueGuess
             });
@@ -111,10 +96,7 @@ $( document ).ready(function() {
           
 
 
-        // This function is run whenever the user presses a key.
-        // creates variable called userGuess with value equal to key that has just been released,
-        // set that value equal to keycode that has just been released, 
-        // take that character, and turn it into a string.
+        /// this function is called when the database value changes
         database.ref().on("value", function(snapshot) {
             var rojoGuess = snapshot.val().RedInput;
             console.log("red is " + rojoGuess);
@@ -159,6 +141,11 @@ $( document ).ready(function() {
                   });
             }
             if ((rojoGuess=='p') && (azulGuess=='s')) {
+                blueWins++;
+                database.ref().update({
+                    RedInput: 0,
+                    BlueInput: 0
+                  });
             }
             if ((rojoGuess==azulGuess)) {
                 ties++;
@@ -171,8 +158,9 @@ $( document ).ready(function() {
             // alert("Please choose, r, p, or s.");
         }
         
+     
 
-        database.ref().update({
+          database.ref().update({
             blueWins: blueWins,
             redWins: redWins,
             ties: ties,
@@ -180,32 +168,18 @@ $( document ).ready(function() {
             // BlueInput: 0
           });
 
-  
-
-       
-          if(redWins++ || blueWins++ || ties++){
-        var html = "<p>Press r, p, or s to start playing<p>" +
-        "<p>red: " + snapshot.val().redWins + "</p>" +
-        "<p>blue: " + snapshot.val().blueWins + "</p>" +
-        "<p>ties: " + snapshot.val().ties + "</p>";
-
-        document.querySelector('#game').innerHTML = html;
-          } else {};
     });
-    //////////////////////////////
-
-    // function trashMan(snapshot){
-    //     $(snapshot.RedInput).empty();
-    //     $(snapshot.BlueInput).empty();
-
-    // };
-
-
-
-
-
-
-
-
+    database.ref().on("value", function(snapshot) {
+        //   if(redWins++ || blueWins++ || ties++){
+            var html = "<p>Press r, p, or s to start playing<p>" +
+            "<p>red: " + snapshot.val().redWins + "</p>" +
+            "<p>blue: " + snapshot.val().blueWins + "</p>" +
+            "<p>ties: " + snapshot.val().ties + "</p>";
+    
+            document.querySelector('#game').innerHTML = html;
+            //   }
+    });
+    
+    
 
 });
