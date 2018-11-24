@@ -28,3 +28,17 @@
 img{
     height: 50px;
 }
+body{
+    background-image: url("images/background.gif");
+}
+
+.score{
+    color: white;
+
+}
+
+#instructions{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}

@@ -47,7 +47,7 @@ $( document ).ready(function() {
  $("#redTeam").on("click", function(){
   redTeam = $("#playingField").append("<div>");
   redTeam.addClass("red");
-  $(".red").text("ROCK, PAPER, SCISSORS");
+  // $(".red").text("ROCK, PAPER, SCISSORS");
   $("#arenaRed").show();
   $("#teamPick").hide();
  });
@@ -55,7 +55,7 @@ $( document ).ready(function() {
  $("#blueTeam").on("click", function(){
   blueTeam = $("#playingField").append("<div>");
   blueTeam.addClass("blue");
-  $(".blue").text("ROCK, PAPER, SCISSORS");
+  // $(".blue").text("ROCK, PAPER, SCISSORS");
   $("#arenaBlue").show();
   $("#teamPick").hide();
  });
@@ -78,6 +78,7 @@ $( document ).ready(function() {
         //// this sends red user input off to firebase
         $(".selectionRed").on("click", function() {
             redGuess = $(this).attr("data-value");
+            // $(".red").text(this.attr("alt"));
             console.log("red clickworking");
             database.ref().update({
               RedInput: redGuess
@@ -87,6 +88,7 @@ $( document ).ready(function() {
           ///This sends user input off to firebase for blueteam
           $(".selectionBlue").on("click", function() {
             blueGuess = $(this).attr("data-value");
+            // $(".blue").text(this.attr("alt"));
             console.log("blue clickworking");
             database.ref().update({
               BlueInput: blueGuess
@@ -170,14 +172,16 @@ $( document ).ready(function() {
 
     });
     database.ref().on("value", function(snapshot) {
-        //   if(redWins++ || blueWins++ || ties++){
-            var html = "<p>Press r, p, or s to start playing<p>" +
-            "<p>red: " + snapshot.val().redWins + "</p>" +
-            "<p>blue: " + snapshot.val().blueWins + "</p>" +
-            "<p>ties: " + snapshot.val().ties + "</p>";
+            // var html = "<p>Press r, p, or s to start playing<p>" +
+            // "<p>red: " + snapshot.val().redWins + "</p>" +
+            // "<p>blue: " + snapshot.val().blueWins + "</p>" +
+            // "<p>ties: " + snapshot.val().ties + "</p>";
+            $("#wins-red").text("Red Wins: " + snapshot.val().redWins);
+            $("#wins-blue").text("Blue Wins: " + snapshot.val().blueWins);
+            $("#ties").text("Ties: " + snapshot.val().ties);
+
     
             document.querySelector('#game').innerHTML = html;
-            //   }
     });
     
     
