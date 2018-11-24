@@ -14,19 +14,6 @@ $( document ).ready(function() {
   // VARIABLES
   // --------------------------------------------------------------------------------
   var database = firebase.database();
-  var clickCounter = 0;
-  // FUNCTIONS + EVENTS
-  // --------------------------------------------------------------------------------
-  //event listener for click from user
-  $("#click-button").on("click", function() {
-    clickCounter++;
-    //updates number of clicks to database
-    database.ref().set({
-      clickCount: clickCounter
-    });
-    
-  });
-// MAIN PROCESS + INITIAL CODE
   // --------------------------------------------------------------------------------
 //              lisents for value event
   database.ref().on("value", function(snapshot) {
@@ -69,16 +56,12 @@ $( document ).ready(function() {
  hider();
 
 
- /////////rock paper scissors logic
-        // var options = ["r", "p", "s"];
-        // var wins = 0;
-        // var losses = 0;
+
         let redGuess = "";
         let blueGuess = "";
         //// this sends red user input off to firebase
         $(".selectionRed").on("click", function() {
             redGuess = $(this).attr("data-value");
-            // $(".red").text(this.attr("alt"));
             console.log("red clickworking");
             database.ref().update({
               RedInput: redGuess
@@ -88,7 +71,6 @@ $( document ).ready(function() {
           ///This sends user input off to firebase for blueteam
           $(".selectionBlue").on("click", function() {
             blueGuess = $(this).attr("data-value");
-            // $(".blue").text(this.attr("alt"));
             console.log("blue clickworking");
             database.ref().update({
               BlueInput: blueGuess
@@ -166,16 +148,10 @@ $( document ).ready(function() {
             blueWins: blueWins,
             redWins: redWins,
             ties: ties,
-            // RedInput: 0,
-            // BlueInput: 0
           });
 
     });
     database.ref().on("value", function(snapshot) {
-            // var html = "<p>Press r, p, or s to start playing<p>" +
-            // "<p>red: " + snapshot.val().redWins + "</p>" +
-            // "<p>blue: " + snapshot.val().blueWins + "</p>" +
-            // "<p>ties: " + snapshot.val().ties + "</p>";
             $("#wins-red").text("Red Wins: " + snapshot.val().redWins);
             $("#wins-blue").text("Blue Wins: " + snapshot.val().blueWins);
             $("#ties").text("Ties: " + snapshot.val().ties);
